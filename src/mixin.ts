@@ -75,6 +75,7 @@ export function mixin(Vue: VueConstructor) {
     const { data } = $options
     // wrapper the data option, so we can invoke setup before data get resolved
     $options.data = function wrappedData() {
+      // 在data周期时，进行setup函数的执行
       initSetup(vm, vm.$props)
       return isFunction(data)
         ? (
@@ -86,11 +87,21 @@ export function mixin(Vue: VueConstructor) {
 
   function initSetup(vm: ComponentInstance, props: Record<any, any> = {}) {
     const setup = vm.$options.setup!
+    // 构造ctx对象，有以下key：
+    // slots: 组件的插槽,默认为 {}
+    // root: 组件的根实例
+    // parent: 组件的父实例
+    // refs: 组件的 ref 引用
+    // listeners: 组件的事件监听器
+    // isServer: 是否是服务端渲染
+    // ssrContext: 服务端渲染的上下文
+    // emit: 组件的自定义事件触发函数
     const ctx = createSetupContext(vm)
     const instance = toVue3ComponentInstance(vm)
     instance.setupContext = ctx
 
     // fake reactive for `toRefs(props)`
+    // 通过Vue.observable对props进行响应式监听
     def(props, '__ob__', createObserver())
 
     // resolve scopedSlots and slots to functions

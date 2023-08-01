@@ -16,7 +16,7 @@ export interface WritableComputedOptions<T> {
   get: ComputedGetter<T>
   set: ComputedSetter<T>
 }
-
+// 底层调的还是createRef，和ref方法类似，只不过监听的get和set是函数罢了
 // read-only
 export function computed<T>(getter: ComputedGetter<T>): ComputedRef<T>
 // writable

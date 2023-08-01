@@ -164,7 +164,7 @@ function queueFlushJob(
       break
   }
 }
-
+// 底层是通过Vue.$watch来实现
 function createVueWatcher(
   vm: ComponentInstance,
   getter: () => any,

@@ -1,6 +1,8 @@
 export {
   reactive,
   isReactive,
+  // markRaw 函数的作用是将一个对象标记为非响应式的原始对象(raw object)。
+  // 类似于冻结对象
   markRaw,
   shallowReactive,
   toRaw,

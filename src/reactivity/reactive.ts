@@ -247,7 +247,7 @@ export function reactive<T extends object>(obj: T): UnwrapRef<T> {
   ) {
     return obj as any
   }
-
+  // 基于Vue.observable，vue3是proxy，vue2是Object.defineProperty
   const observed = observe(obj)
   setupAccessControl(observed)
   return observed as UnwrapRef<T>

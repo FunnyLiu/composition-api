@@ -102,7 +102,8 @@ export function ref(raw?: unknown) {
   if (isRef(raw)) {
     return raw
   }
-
+  // ref的本质其实还是调用的reactive
+  // 然后通过 get/set 方法操作这个对象的值来实现对 ref 值的跟踪和响应
   const value = reactive({ [RefKey]: raw })
   return createRef({
     get: () => value[RefKey] as any,

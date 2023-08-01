@@ -45,6 +45,11 @@ function wrapHookCall(
     }
   }
 }
+// 利用 Vue 的选项合并策略(option merge strategies),
+// 通过给组件实例的 $options 注入自定义的生命周期hook函数,来override原有的生命周期选项。
+
+// 生命周期hook函数需要通过 getCurrentInstance() 获取当前活跃的组件实例,
+// 并在执行回调前通过 setCurrentInstance()绑定实例,在回调执行完毕后恢复之前的实例。
 
 export const onBeforeMount = createLifeCycle('beforeMount')
 export const onMounted = createLifeCycle('mounted')
